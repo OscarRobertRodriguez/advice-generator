@@ -1,7 +1,10 @@
 import styled from "styled-components";
-import { QUERIES}  from '../constants'; 
-import dividerMobile from '../images/pattern-divider-mobile.svg'; 
-import dividerDesktop from '../images/pattern-divider-desktop.svg'; 
+import React from 'react';
+import { QUERIES}  from '../../constants'; 
+import dividerMobile from '../../images/pattern-divider-mobile.svg'; 
+import dividerDesktop from '../../images/pattern-divider-desktop.svg'; 
+import DiceIcon from '../../images/icon-dice.svg';
+import styles from './Card.module.css';
 
 const Wrapper = styled.div`
   background-color: var(--dark-grayish-blue);
@@ -13,6 +16,8 @@ const Wrapper = styled.div`
   display: grid;
   justify-items: center ;
   align-items: center ;
+  position: relative ;
+  box-shadow: 30px 50px 80px rgba(0,0,0,0.100202);
 
 
   @media ${QUERIES.tabletAndUp} {
@@ -66,6 +71,30 @@ const Divider = styled.img`
   }
 `; 
 
+const DiceContainer = styled.div`
+  background-color:var(--neon-green);
+  width: calc(64 /16 * 1rem);
+  height: calc(64 /16 * 1rem);;
+  border-radius: 50% ;
+  position: absolute ;
+  bottom: -63px;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  cursor: pointer;
+  transition: box-shadow .2s ease-in-out;
+
+  &:hover {
+    box-shadow: 0px 0px 40px var(--neon-green); 
+  }
+`; 
+
+const Dice = styled.img`
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+`; 
+
 
 
 const Card = () => {
@@ -74,7 +103,11 @@ const Card = () => {
     <Wrapper>
       <Title>advice #117</Title>
       <Quote>It is easy to sit up and take notice, what's difficult is getting up and taking action.</Quote>
-      <Divider src={dividerMobile} alt='divider decoration' /> 
+      <Divider className={styles.mobileDivider} src={dividerMobile} alt='divider decoration' />  
+      <Divider className={styles.desktopDivider} src={dividerDesktop} alt='divider decoration' /> 
+      <DiceContainer>
+        <Dice src={DiceIcon} />
+      </DiceContainer>
     </Wrapper>
   )
 }

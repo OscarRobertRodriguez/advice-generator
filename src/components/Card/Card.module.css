@@ -1,0 +1,15 @@
+
+.desktopDivider {
+  display: none;
+  }
+
+  @media (min-width: 34.375rem) {
+    .desktopDivider {
+      display:revert;
+    }
+    .mobileDivider {
+      display: none;
+    }
+  }
+
+

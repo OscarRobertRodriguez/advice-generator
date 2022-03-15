@@ -2,8 +2,8 @@ import styled from "styled-components";
 import GlobalStyles  from './GlobalStyles';
 import { QUERIES}  from './constants';
 
-import Card from './components/Card';
-import Footer from './components/Footer';
+import Card from './components/Card/Card';
+import Footer from './components/Footer/Footer';
 
 const Wrapper = styled.div`
   --dark-blue: hsl(218, 23%, 16%); 
