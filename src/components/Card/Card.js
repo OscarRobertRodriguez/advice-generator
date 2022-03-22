@@ -1,10 +1,12 @@
 import styled from "styled-components";
-import React from 'react';
+import React, {useState, useEffect} from 'react';
 import { QUERIES}  from '../../constants'; 
 import dividerMobile from '../../images/pattern-divider-mobile.svg'; 
 import dividerDesktop from '../../images/pattern-divider-desktop.svg'; 
 import DiceIcon from '../../images/icon-dice.svg';
 import styles from './Card.module.css';
+import DataFetching from "../DataFetching";
+import axios from "axios";
 
 const Wrapper = styled.div`
   background-color: var(--dark-grayish-blue);
@@ -71,7 +73,7 @@ const Divider = styled.img`
   }
 `; 
 
-const DiceContainer = styled.div`
+const DiceButton = styled.button`
   background-color:var(--neon-green);
   width: calc(64 /16 * 1rem);
   height: calc(64 /16 * 1rem);;
@@ -82,6 +84,7 @@ const DiceContainer = styled.div`
   transform: translate(-50%, -50%);
   cursor: pointer;
   transition: box-shadow .2s ease-in-out;
+  border: none;
 
   &:hover {
     box-shadow: 0px 0px 40px var(--neon-green); 
@@ -96,18 +99,39 @@ const Dice = styled.img`
 `; 
 
 
-
 const Card = () => {
+
+
+  const [data, setData] = useState(''); 
+  const [buttonClick, setButtonClick] = useState(1); 
+
+  useEffect(() => {
+
+    async function fetchData() {
+      const url =  "https://api.adviceslip.com/advice"; 
+      const result = await axios.get(url); 
+      const data = result.data.slip; 
+      setData(data); 
+    }
+   
+    fetchData();
+
+  }, [buttonClick]); 
+
+  const handleClick = () => {
+     setButtonClick(buttonClick + 1); 
+  }
+
 
   return (
     <Wrapper>
-      <Title>advice #117</Title>
-      <Quote>It is easy to sit up and take notice, what's difficult is getting up and taking action.</Quote>
+      <Title>advice #{data.id}</Title>
+      <Quote>{data.advice}</Quote>
       <Divider className={styles.mobileDivider} src={dividerMobile} alt='divider decoration' />  
       <Divider className={styles.desktopDivider} src={dividerDesktop} alt='divider decoration' /> 
-      <DiceContainer>
+      <DiceButton onClick={handleClick}>
         <Dice src={DiceIcon} />
-      </DiceContainer>
+      </DiceButton>
     </Wrapper>
   )
 }
