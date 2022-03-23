@@ -100,16 +100,16 @@ const Dice = styled.img`
 
 
 const Card = () => {
-
-
   const [data, setData] = useState(''); 
   const [buttonClick, setButtonClick] = useState(1); 
 
   useEffect(() => {
 
+    
+
     async function fetchData() {
       const url =  "https://api.adviceslip.com/advice"; 
-      const result = await axios.get(url); 
+      const result = await axios.get(`${url}?cb=${Date.now()}`); 
       const data = result.data.slip; 
       setData(data); 
     }
@@ -129,7 +129,7 @@ const Card = () => {
       <Quote>{data.advice}</Quote>
       <Divider className={styles.mobileDivider} src={dividerMobile} alt='divider decoration' />  
       <Divider className={styles.desktopDivider} src={dividerDesktop} alt='divider decoration' /> 
-      <DiceButton onClick={handleClick}>
+      <DiceButton onClick={() => handleClick()}>
         <Dice src={DiceIcon} />
       </DiceButton>
     </Wrapper>
