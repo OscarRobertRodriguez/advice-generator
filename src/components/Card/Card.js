@@ -5,7 +5,6 @@ import dividerMobile from '../../images/pattern-divider-mobile.svg';
 import dividerDesktop from '../../images/pattern-divider-desktop.svg'; 
 import DiceIcon from '../../images/icon-dice.svg';
 import styles from './Card.module.css';
-import DataFetching from "../DataFetching";
 import axios from "axios";
 
 const Wrapper = styled.div`
